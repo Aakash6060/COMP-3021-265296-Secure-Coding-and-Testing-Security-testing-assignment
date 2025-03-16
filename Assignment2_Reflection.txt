@@ -41,3 +41,21 @@ Scan Results Overview:
    SuperLinter: Successfully linted both JavaScript and Java code without issues, ensuring coding standards were met.
 
 The tests confirmed that GitHub Actions tools handle different languages effectively when configured correctly, except for Bandit, which is Python-specific.
+
+5.  Reflection Question: How did the AppScan CodeSweep scan performance compare to the previous code scanners you used? Be specific. (i.e., CodeQL and Bandit)
+
+In my evaluation, the AppScan CodeSweep scanner performed differently compared to CodeQL and Bandit, each having its strengths and weaknesses.
+
+   AppScan CodeSweep completed its scan successfully without identifying any security issues in my code. The scan was quick, taking approximately 31 seconds to complete, and the GitHub action ran smoothly without errors. The CodeSweep scan seemed to focus on broader security issues but missed some specific vulnerabilities that Bandit detected.
+
+   CodeQL performed a more thorough analysis, taking around 1 minute and 33 seconds. It provided a deeper inspection of the code structure and logic, which could catch complex vulnerabilities beyond what CodeSweep detected. However, CodeQL didn't flag any issues in my code, suggesting it may have a higher threshold for reporting issues or that my code met its standards.
+
+   Bandit was the most effective at identifying specific Python security vulnerabilities. It quickly detected three issues: a high-severity command injection risk via os.system, a medium-severity insecure HTTP request, and a medium-severity SQL injection risk due to string-based query construction. The scan failed to complete successfully due to configuration issues, which is a drawback compared to the reliability shown by CodeQL and CodeSweep.
+
+Comparison Summary:
+
+   CodeSweep was fast and reliable but less sensitive, failing to detect vulnerabilities that Bandit caught.
+   CodeQL provided deep code analysis but did not report issues, possibly indicating either stronger code quality or missed vulnerabilities.
+   Bandit was the most effective for Python-specific issues, identifying critical vulnerabilities that CodeSweep missed, but it struggled with reliability in my GitHub Actions setup.
+
+In conclusion, while AppScan CodeSweep performed well in terms of speed and reliability, it did not match Bandit’s effectiveness in identifying specific vulnerabilities. Combining multiple tools like CodeQL, Bandit, and CodeSweep ensures broader coverage and increases the chance of identifying all vulnerabilities in the code.
