@@ -1,0 +1,28 @@
+1. Do these results match what you found in your previous peer review? Why or why not?
+
+Yes, the Bandit scan results closely match the vulnerabilities I identified during the peer review. Specifically, Bandit flagged the following issues:
+  Command Injection via os.system: I had noted this vulnerability and recommended using Python’s smtplib for sending emails, which my teammate implemented.
+  Insecure HTTP Request: Bandit identified the insecure use of HTTP, which I addressed by changing the URL to use HTTPS.
+  SQL Injection Risk: Bandit highlighted the SQL injection vulnerability due to string-based query construction, which I discussed in my review but hadn't modified in the code.
+
+The scan results aligned with most of what I found, confirming Bandit's effectiveness in identifying key vulnerabilities. However, Bandit didn’t catch the lack of input validation and missing exception handling, which I also flagged.
+
+2. Do you think they caught all the vulnerabilities present in the code? Why or why not?
+
+No, the scan didn’t catch all vulnerabilities. While Bandit successfully identified major issues like command injection, insecure HTTP requests, and potential SQL injection, it missed:
+   Lack of Input Validation: Bandit didn't flag the absence of input validation in the get_user_input() function, which could lead to injection or malformed data.
+   Missing Exception Handling: The absence of error handling in functions like get_data() and save_to_db() was not detected by Bandit.
+   Hardcoded Credentials: Bandit didn’t flag the hardcoded credentials issue, though it’s a critical security flaw.
+
+Automated scanners like Bandit are excellent at catching specific known issues but may miss contextual vulnerabilities or logic errors, emphasizing the need for manual code reviews.
+
+3. Why is using multiple code scanners better than using one?
+
+Using multiple scanners like CodeQL, SuperLinter, and Bandit provides a more comprehensive security assessment because:
+
+   Different Focus Areas: Each tool specializes in identifying different types of issues. Bandit focuses on Python security flaws, CodeQL performs deep code analysis for vulnerabilities, and SuperLinter checks for code style, syntax errors, and potential bugs.
+   Coverage: Multiple tools increase the likelihood of catching various issues, as some vulnerabilities may be missed by one scanner but detected by another.
+   Reducing False Negatives: Combining scanners minimizes the chance that vulnerabilities go undetected due to tool limitations.
+   Broader Language Support: Some tools support multiple languages, allowing you to scan projects with mixed language codebases effectively.
+
+Overall, a multi-scanner approach leads to more robust and secure code by covering gaps that a single tool might leave.
