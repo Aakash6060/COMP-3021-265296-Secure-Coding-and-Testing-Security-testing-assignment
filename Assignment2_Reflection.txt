@@ -26,3 +26,18 @@ Using multiple scanners like CodeQL, SuperLinter, and Bandit provides a more com
    Broader Language Support: Some tools support multiple languages, allowing you to scan projects with mixed language codebases effectively.
 
 Overall, a multi-scanner approach leads to more robust and secure code by covering gaps that a single tool might leave.
+
+4. Test out some code from different languages as well, to see how the GitHub actions perform.
+
+I tested JavaScript and Java code in addition to Python:
+
+   JavaScript (Node.js) Code: A simple function to add two numbers, using readline for user input.
+   Java Code: A basic program to validate user age input, ensuring the age isn't negative.
+
+Scan Results Overview:
+
+   CodeQL: Successfully scanned both JavaScript and Java code.
+   Bandit: As expected, Bandit only scans Python code, so it failed when scanning non-Python files, which is reflected in the results.
+   SuperLinter: Successfully linted both JavaScript and Java code without issues, ensuring coding standards were met.
+
+The tests confirmed that GitHub Actions tools handle different languages effectively when configured correctly, except for Bandit, which is Python-specific.
